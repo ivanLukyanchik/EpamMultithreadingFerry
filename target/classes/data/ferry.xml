@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ferries>
+    <ferry>
+        <carrying>8000</carrying>
+        <square>60</square>
+    </ferry>
+</ferries>

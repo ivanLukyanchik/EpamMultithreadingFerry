@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<cars>
+    <car>
+        <weight>1750</weight>
+        <square>13</square>
+    </car>
+    <car>
+        <weight>1950</weight>
+        <square>11</square>
+    </car>
+    <car>
+        <weight>2100</weight>
+        <square>15</square>
+    </car>
+    <car>
+        <weight>1100</weight>
+        <square>8</square>
+    </car>
+    <car>
+        <weight>1360</weight>
+        <square>9</square>
+    </car>
+    <car>
+        <weight>1400</weight>
+        <square>10</square>
+    </car>
+    <car>
+        <weight>1050</weight>
+        <square>12</square>
+    </car>
+</cars>
