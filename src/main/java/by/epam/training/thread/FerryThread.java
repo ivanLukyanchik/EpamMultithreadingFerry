@@ -10,8 +10,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static by.epam.training.entity.Ferry.DEFAULT_SQUARE;
-
 public class FerryThread implements Runnable {
     private static Logger log = LogManager.getLogger(FerryThread.class);
     private static FerryThread instance;
@@ -20,21 +18,14 @@ public class FerryThread implements Runnable {
     private Ferry ferry;
     private CopyOnWriteArrayList<CarThread> registeredCars = new CopyOnWriteArrayList<>();
 
-    public FerryThread(Ferry ferry) {
+    private FerryThread(Ferry ferry) {
         this.ferry = ferry;
-    }
-
-    public static FerryThread getInstance() {
-        if (!isCreated.get()) {
-            instance = getInstance(Ferry.DEFAULT_CARRYING, DEFAULT_SQUARE);
-        }
-        return instance;
     }
 
     public static FerryThread getInstance(int carrying, int square) {
         if (!isCreated.get()) {
+            lock.lock(); // block until condition holds
             try {
-                lock.lock();
                 if (instance == null) {
                     instance = new FerryThread(new Ferry(carrying, square));
                     isCreated.set(true);
@@ -66,7 +57,6 @@ public class FerryThread implements Runnable {
                         log.info(String.format("Car №%d was loaded on a ferry.", carThread.getCar().getId()));
                         currentCarrying -= carThread.getCar().getWeight();
                         currentSquare -= carThread.getCar().getSquare();
-
                     } else {
                         log.info(String.format("Car №%d doesn't fit on a ferry.", carThread.getCar().getId()));
                     }
@@ -117,9 +107,9 @@ public class FerryThread implements Runnable {
                 log.error(e);
             }
         }
-        for (CarThread listCarThread : registeredCars) {
-            if (listCarThread.getCar().getCarState() == CarState.TRANSPORTED) {
-                registeredCars.remove(listCarThread);
+        for (CarThread car : registeredCars) {
+            if (car.getCar().getCarState() == CarState.TRANSPORTED) {
+                registeredCars.remove(car);
             }
         }
     }

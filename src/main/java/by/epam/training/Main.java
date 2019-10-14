@@ -1,5 +1,6 @@
 package by.epam.training;
 
+import by.epam.training.entity.CarType;
 import by.epam.training.entity.Ferry;
 import by.epam.training.exception.CustomException;
 import by.epam.training.parser.CarsSaxParser;
@@ -20,6 +21,7 @@ public class Main {
     private static int square = Ferry.DEFAULT_SQUARE;
 
     public static void main(String[] args) {
+        System.out.println(CarType.LORRY.toString());
         CarsSaxParser carsSaxParser = new CarsSaxParser();
         FerrySaxParser ferriesSaxParser = new FerrySaxParser();
         List<CarThread> cars = null;
@@ -49,8 +51,6 @@ public class Main {
             }
         }
         ferryService.shutdown();
-        log.info("FerryService has completed work.");
         carService.shutdown();
-        log.info("CarService has completed work.");
     }
 }

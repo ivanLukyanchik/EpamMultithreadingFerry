@@ -2,30 +2,37 @@
 
 <cars>
     <car>
+        <type>passenger_car</type>
         <weight>1750</weight>
         <square>13</square>
     </car>
     <car>
+        <type>lorry</type>
         <weight>1950</weight>
         <square>11</square>
     </car>
     <car>
+        <type>lorry</type>
         <weight>2100</weight>
         <square>15</square>
     </car>
     <car>
+        <type>passenger_car</type>
         <weight>1100</weight>
         <square>8</square>
     </car>
     <car>
+        <type>passenger_car</type>
         <weight>1360</weight>
         <square>9</square>
     </car>
     <car>
-        <weight>1400</weight>
+        <type>lorry</type>
+        <weight>2400</weight>
         <square>10</square>
     </car>
     <car>
+        <type>passenger_car</type>
         <weight>1050</weight>
         <square>12</square>
     </car>

@@ -1,6 +1,5 @@
 package by.epam.training.handler;
 
-import by.epam.training.entity.Ferry;
 import by.epam.training.thread.FerryThread;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
@@ -40,7 +39,7 @@ public class FerryHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) {
         currentElement = "";
         if (qName.equals("ferry")) {
-            ferries.add(new FerryThread(new Ferry(carrying, square)));
+            ferries.add(FerryThread.getInstance(carrying, square));
         }
     }
 }
