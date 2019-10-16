@@ -25,21 +25,14 @@ public class Main {
         CarsSaxParser carsSaxParser = new CarsSaxParser();
         FerrySaxParser ferriesSaxParser = new FerrySaxParser();
         List<CarThread> cars = null;
-        List<FerryThread> ferries = null;
+        FerryThread ferryThread = null;
         try {
             cars = carsSaxParser.parse(CARS_PATH);
-            ferries = ferriesSaxParser.parse(FERRY_PATH);
+            ferryThread = ferriesSaxParser.parse(FERRY_PATH);
         } catch (CustomException e) {
             log.error(e);
         }
-        if (ferries != null) {
-            Ferry ferry = ferries.get(0).getFerry();
-            carrying = ferry.getCarrying();
-            square = ferry.getSquare();
-        }
         ExecutorService carService = Executors.newCachedThreadPool();
-        ScheduledExecutorService ferryService = Executors.newScheduledThreadPool(1);
-        ferryService.scheduleAtFixedRate(FerryThread.getInstance(carrying, square),0,1, TimeUnit.SECONDS);
         if (cars != null) {
             for (CarThread car : cars) {
                 carService.submit(car);
@@ -50,6 +43,13 @@ public class Main {
                 }
             }
         }
+        if (ferryThread != null) {
+            Ferry ferry = ferryThread.getFerry();
+            carrying = ferry.getCarrying();
+            square = ferry.getSquare();
+        }
+        ExecutorService ferryService = Executors.newCachedThreadPool();
+        ferryService.submit(FerryThread.getInstance(carrying, square));
         ferryService.shutdown();
         carService.shutdown();
     }

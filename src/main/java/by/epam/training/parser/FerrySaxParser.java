@@ -12,16 +12,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
-import java.util.List;
 
 public class FerrySaxParser {
     private static Logger log = LogManager.getLogger(FerrySaxParser.class);
 
-    public List<FerryThread> parse(String fileName) throws CustomException {
+    public FerryThread parse(String fileName) throws CustomException {
         return buildListFerries(fileName);
     }
 
-    private List<FerryThread> buildListFerries(String fileName) throws CustomException {
+    private FerryThread buildListFerries(String fileName) throws CustomException {
         FerryHandler ferryHandler = new FerryHandler();
         try {
             SAXParserFactory parserFactory = SAXParserFactory.newInstance();
@@ -39,6 +38,6 @@ public class FerrySaxParser {
             throw new CustomException("Unexpected error with path: " + fileName, e);
         }
         log.info("Ferry SAX : parsed successfully");
-        return ferryHandler.getFerries();
+        return ferryHandler.getFerry();
     }
 }

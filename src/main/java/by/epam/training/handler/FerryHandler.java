@@ -11,14 +11,10 @@ public class FerryHandler extends DefaultHandler {
     private int carrying;
     private int square;
     private String currentElement;
-    private List<FerryThread> ferries;
+    private FerryThread ferry;
 
-    public FerryHandler() {
-        ferries = new ArrayList<>();
-    }
-
-    public List<FerryThread> getFerries() {
-        return ferries;
+    public FerryThread getFerry() {
+        return ferry;
     }
 
     @Override
@@ -39,7 +35,7 @@ public class FerryHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) {
         currentElement = "";
         if (qName.equals("ferry")) {
-            ferries.add(FerryThread.getInstance(carrying, square));
+           ferry = FerryThread.getInstance(carrying, square);
         }
     }
 }
